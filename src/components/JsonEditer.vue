@@ -31,7 +31,7 @@ let fromSetValue = false;
 export default {
     mounted() {
         editor = ace.edit('json_editor');
-        editor.setValue(JSON.stringify(this.$store.state.source, null, '\t'));
+        editor.setValue(JSON.stringify(this.$store.state.source, null, '\t'), -1);
         editor.setTheme(chrome);
         editor.setFontSize(14);
         editor.getSession().setMode('ace/mode/json');

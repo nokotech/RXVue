@@ -34,7 +34,7 @@ let fromSetValue = false;
 export default {
     mounted() {
         editor = ace.edit('yaml_editor');
-        editor.setValue(YAML.stringify(this.$store.state.source));
+        editor.setValue(YAML.stringify(this.$store.state.source), -1);
         editor.setTheme(chrome);
         editor.setFontSize(14);
         editor.getSession().setMode('ace/mode/yaml');
@@ -76,7 +76,7 @@ export default {
         this.$store.subscribe((mutation, state) => {
             if (mutation.type !== 'updateSourceToYaml') {
                 fromSetValue = true;
-                editor.setValue(YAML.stringify(this.$store.state.source));
+                editor.setValue(YAML.stringify(this.$store.state.source), 1);
                 fromSetValue = false;
             }
         });
