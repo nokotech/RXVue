@@ -1,5 +1,5 @@
 <template>
-<div id="json_editer">
+<div id="json_editer_content">
     <div id="json_editer_header">JSON</div>
     <div id="json_editer_button">
         <md-button @click="undo">
@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss">
-#json_editer {
+#json_editer_content {
     text-align: left;
     border: 1px solid #AAA;
 }

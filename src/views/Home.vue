@@ -11,7 +11,7 @@
     </md-button>
     <Split style="height: 800px;" ref="selfSplit">
         <SplitArea :size="size1" ref="area1">
-            <YamlEditer/>
+            <BlockEditer/>
         </SplitArea>
         <SplitArea :size="size2" ref="area2">
             <JsonEditer/>
@@ -30,6 +30,8 @@ import {
 import HelloWorld from '@/components/HelloWorld.vue';
 import YamlEditer from '@/components/YamlEditer.vue';
 import JsonEditer from '@/components/JsonEditer.vue';
+import BlockEditer from '@/components/BlockEditer.vue';
+
 
 import VueSplit from 'vue-split-panel';
 Vue.use(VueSplit);
@@ -37,6 +39,7 @@ Vue.use(VueSplit);
 Vue.component('HelloWorld', HelloWorld);
 Vue.component('YamlEditer', YamlEditer);
 Vue.component('JsonEditer', JsonEditer);
+Vue.component('BlockEditer', BlockEditer);
 
 export default {
     data: () => ({

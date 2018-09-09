@@ -1,5 +1,5 @@
 <template>
-<div id="yaml_editer">
+<div id="yaml_editer_content">
     <div id="yaml_editer_header">YAML</div>
     <div id="yaml_editer_button">
         <md-button @click="undo">
