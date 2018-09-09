@@ -3,7 +3,7 @@
     <md-button class="md-primary" @click="size1=90; size2=10;">
         <md-icon>chevron_right</md-icon>
     </md-button>
-    <md-button class="md-primary" @click="size1=50; size2=50; this.$refs.selfSplit.reset();">
+    <md-button class="md-primary" @click="size1=50; size2=50; $refs.selfSplit.reset();">
         <md-icon>swap_horiz</md-icon>
     </md-button>
     <md-button class="md-primary" @click="size1=10; size2=90;">
@@ -14,9 +14,10 @@
             <YamlEditer/>
         </SplitArea>
         <SplitArea :size="size2" ref="area2">
-            <img alt="Vue logo" src="../assets/logo.png">
-            <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+            <JsonEditer/>
         </SplitArea>
+        <img alt="Vue logo" src="../assets/logo.png">
+        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
     </Split>
 </div>
 </template>
@@ -28,12 +29,14 @@ import {
 } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue';
 import YamlEditer from '@/components/YamlEditer.vue';
+import JsonEditer from '@/components/JsonEditer.vue';
 
 import VueSplit from 'vue-split-panel';
 Vue.use(VueSplit);
 
 Vue.component('HelloWorld', HelloWorld);
 Vue.component('YamlEditer', YamlEditer);
+Vue.component('JsonEditer', JsonEditer);
 
 export default {
     data: () => ({

@@ -8,11 +8,11 @@
         <md-button @click="redo">
             <md-icon>redo</md-icon>
         </md-button>
-        <md-button @click="">
+        <md-button @click="save">
             <md-icon>save</md-icon>
         </md-button>
     </div>
-    <div id="editor" style="height: 600px; width: 100%;"></div>
+    <div id="yaml_editor" style="height: 600px; width: 100%;" />
 </div>
 </template>
 
@@ -25,12 +25,16 @@ import ace from 'ace-builds';
 import 'ace-builds/src-noconflict/mode-yaml.js';
 import chrome from 'ace-builds/src-noconflict/theme-chrome.js';
 import monokai from 'ace-builds/src-noconflict/theme-monokai.js';
+import YAML from 'json2yaml';
+import yaml from 'js-yaml';
 
 let editor = null;
+let fromSetValue = false;
 
 export default {
     mounted() {
-        editor = ace.edit('editor');
+        editor = ace.edit('yaml_editor');
+        editor.setValue(YAML.stringify(this.$store.state.source));
         editor.setTheme(chrome);
         editor.setFontSize(14);
         editor.getSession().setMode('ace/mode/yaml');
@@ -59,15 +63,25 @@ export default {
             exec: (e) => editor.redo(),
         });
         editor.getSession().on('change', (v) => {
-            // console.log('change in my world!', v);
+            try {
+                if (!editor.getValue() || fromSetValue) {
+                    return;
+                }
+                const val = yaml.safeLoad(editor.getValue());
+                this.$store.commit('updateSourceToYaml', val);
+            } catch (e) {
+                // console.warn('YAML PARSE ERROR!!!');
+            }
+        });
+        this.$store.subscribe((mutation, state) => {
+            if (mutation.type !== 'updateSourceToYaml') {
+                fromSetValue = true;
+                editor.setValue(YAML.stringify(this.$store.state.source));
+                fromSetValue = false;
+            }
         });
     },
 
-    data() {
-        return {
-            contentA: 'default content for Editor A',
-        };
-    },
     methods: {
         undo() {
             editor.undo();
@@ -75,13 +89,11 @@ export default {
         redo() {
             editor.redo();
         },
+        save() {
+            /* empty */
+        },
         reset() {
             this.contentA = 'reset content for Editor A';
-        },
-        changeContentA(val) {
-            if (this.contentA !== val) {
-                this.contentA = val;
-            }
         },
     },
 };
@@ -98,9 +110,14 @@ export default {
     background-color: #999;
     color: #FFF;
 }
-#yaml_editer_button button{
-    height: 36px;
-    min-width: 36px;
-    margin: 4px;
+
+#yaml_editer_button {
+    overflow: hidden;
+    height: 44px;
+    button {
+        height: 36px;
+        min-width: 36px;
+        margin: 4px;
+    }
 }
 </style>
