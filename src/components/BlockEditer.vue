@@ -41,6 +41,9 @@ export default {
         save() {
             /* empty */
         },
+        add() {
+            /* empty */
+        },
     },
 };
 </script>
