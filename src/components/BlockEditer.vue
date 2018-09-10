@@ -1,6 +1,6 @@
 <template>
 <div id="block_editer_content">
-    <div id="block_editer_header">YAML</div>
+    <div id="block_editer_header">BLOCK</div>
     <div id="block_editer_button">
         <md-button @click="undo">
             <md-icon>undo</md-icon>
@@ -12,7 +12,7 @@
             <md-icon>save</md-icon>
         </md-button>
     </div>
-    <div id="block_editor" style="height: 600px; width: 100%;">
+    <div id="block_editor" style="width: 100%;">
         <TableComp :val="this.$store.state.source"/>
     </div>
 </div>
@@ -46,12 +46,13 @@ export default {
 #block_editer_content {
     text-align: left;
     border: 1px solid #AAA;
+    padding-bottom: 8px;
 }
 
 #block_editor {
     padding: 0 8px;
     table td {
-        border: 1px solid #AAA; 
+        border: 1px solid #CCC;
     }
 }
 
