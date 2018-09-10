@@ -4,3 +4,4 @@ declare module '*.vue' {
 }
 
 declare module 'vue-split-panel'
+declare module 'table-dragger'

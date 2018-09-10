@@ -1,36 +1,88 @@
 <template>
-    <md-table v-if="typeof val === 'object'">
-        <md-table-row v-for="(item, key) in val" :key="item.id">
-            <md-table-cell class="key">
-              {{key}}
-            </md-table-cell>
-            <md-table-cell class="value">
-              <TableComp :val="item"/>
-            </md-table-cell>
-        </md-table-row>
-    </md-table>
-    <span v-else-if="typeof val != 'object'">{{val}}</span>
+<div>
+    <table id="table_key" class="frame" v-if="typeof val === 'object'" border="1">
+        <!-- <thead>
+            <tr>
+                <th class="header">key</th>
+                <th class="header">value</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            <tr v-for="(item, key) in val" :key="item.id">
+                <td class="key">
+                    <md-icon class="del_icon">swap_vert</md-icon>
+                    <md-icon class="del_icon">delete</md-icon>
+                    <span class="str">{{key}}</span>
+                </td>
+                <td class="value">
+                    <TableComp :val="item" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span class="str" v-else-if="typeof val != 'object'">{{val}}</span>
+</div>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-property-decorator';
+import {
+    Vue,
+} from 'vue-property-decorator';
 import TableComp from '@/components/custom/TableComp.vue';
+import tableDragger from 'table-dragger';
 
 Vue.component('TableComp', TableComp);
 
 export default {
-  props: ['val'],
+    props: ['table_key', 'val'],
+    mounted() {
+        // const doms = document.getElementsByClassName('frame');
+        // for (const dom of doms) {
+        //     const dragger = tableDragger(dom, {
+        //             mode: 'row',
+        //         })
+        //         .on('drop', (from: number, to: number, el: Element, mode: string) => {
+        //             console.log(`drop ${el.nodeName} from ${from} ${mode} to ${to} ${mode}`);
+        //         });
+        // }
+    },
 };
 </script>
 
 <style lang="scss">
-// .md-table-cell:last-child .md-table-cell-container {
-//   padding: 0px;
-// }
-.key {
-  color: #1DA462;
+.frame {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
 }
+
+.header {
+    color: #333;
+    border: 1px solid #CCC;
+    padding: 8px;
+    background-color: #EEEEEE;
+}
+
+.key {
+    color: #1DA462;
+    border: 1px solid #CCC;
+    padding: 8px;
+    background-color: #F6F6F6;
+}
+
 .value {
-  color: #4C8BF5;
+    color: #4C8BF5;
+    border: 1px solid #CCC;
+    padding: 8px;
+    background-color: #FFFFFF;
+}
+
+.del_icon {
+    color: #ff5252;
+}
+
+.str {
+    padding-left: 4px;
 }
 </style>

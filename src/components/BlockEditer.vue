@@ -11,9 +11,12 @@
         <md-button @click="save">
             <md-icon>save</md-icon>
         </md-button>
+        <md-button @click="add">
+            <md-icon>add</md-icon>
+        </md-button>
     </div>
     <div id="block_editor" style="width: 100%;">
-        <TableComp :val="this.$store.state.source"/>
+        <TableComp :val="this.$store.state.source" table_key="key1" />
     </div>
 </div>
 </template>
@@ -51,9 +54,6 @@ export default {
 
 #block_editor {
     padding: 0 8px;
-    table td {
-        border: 1px solid #CCC;
-    }
 }
 
 #block_editer_header {
@@ -65,6 +65,7 @@ export default {
 #block_editer_button {
     overflow: hidden;
     height: 44px;
+
     button {
         height: 36px;
         min-width: 36px;
