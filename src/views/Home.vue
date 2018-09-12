@@ -51,8 +51,8 @@ export default {
     data: () => ({
         size1: 50,
         size2: 50,
-        left: "YAML",
-        right: "JSON",
+        left: `YAML`,
+        right: `JSON`,
     }),
     methods: {},
 };

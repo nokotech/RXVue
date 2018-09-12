@@ -12,6 +12,7 @@
             <md-icon>save</md-icon>
         </md-button>
     </div>
+    <div v-show="error">ERROR</div>
     <div id="json_editor" style="height: 600px; width: 100%;" />
 </div>
 </template>
@@ -24,11 +25,15 @@ import {
 import 'ace-builds/src-noconflict/mode-json.js';
 import chrome from 'ace-builds/src-noconflict/theme-chrome.js';
 import monokai from 'ace-builds/src-noconflict/theme-monokai.js';
+import Ajv from 'ajv';
 
 let editor = null;
 let fromSetValue = false;
 
 export default {
+    data: () => ({
+        error: false,
+    }),
     mounted() {
         editor = ace.edit('json_editor');
         editor.setValue(JSON.stringify(this.$store.state.source, null, '\t'), -1);
@@ -64,7 +69,11 @@ export default {
                 if (!editor.getValue() || fromSetValue) {
                     return;
                 }
-                // TODO: JSON validater
+                const validate = new Ajv().compile({ 'type': 'object' });
+                const valid = validate(editor.getValue());
+                console.log(validate);
+                this.data().error = !validate.errors;
+
                 const val = JSON.parse(editor.getValue());
                 this.$store.commit('updateSourceToJson', val);
             } catch (e) {
