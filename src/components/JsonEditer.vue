@@ -64,10 +64,13 @@ export default {
                 if (!editor.getValue() || fromSetValue) {
                     return;
                 }
+                // TODO: JSON validater
                 const val = JSON.parse(editor.getValue());
                 this.$store.commit('updateSourceToJson', val);
             } catch (e) {
                 // console.warn('JSON PARSE ERROR!!!');
+                // console.warn(v);
+                // console.warn(e);
             }
         });
         this.$store.subscribe((mutation, state) => {

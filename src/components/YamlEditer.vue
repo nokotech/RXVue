@@ -71,6 +71,7 @@ export default {
                 this.$store.commit('updateSourceToYaml', val);
             } catch (e) {
                 // console.warn('YAML PARSE ERROR!!!');
+                // console.warn(e);
             }
         });
         this.$store.subscribe((mutation, state) => {
@@ -100,7 +101,7 @@ export default {
 </script>
 
 <style lang="scss">
-#yaml_editer {
+#yaml_editer_content {
     text-align: left;
     border: 1px solid #AAA;
 }

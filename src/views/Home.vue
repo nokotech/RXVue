@@ -11,14 +11,20 @@
     </md-button>
     <Split style="height: 800px;" ref="selfSplit">
         <SplitArea :size="size1" ref="area1">
-            <BlockEditer/>
+            <md-button class="md-primary" @click="left='YAML'">YAML</md-button>
+            <md-button class="md-primary" @click="left='BLOCK'">BLOCK</md-button>
+            <YamlEditer v-show="left==='YAML'"/>
+            <BlockEditer v-show="left==='BLOCK'"/>
         </SplitArea>
         <SplitArea :size="size2" ref="area2">
+            <md-button class="md-primary">
+                JSON
+            </md-button>
             <JsonEditer/>
         </SplitArea>
-        <img alt="Vue logo" src="../assets/logo.png">
-        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
     </Split>
+    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
+    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
 </div>
 </template>
 
@@ -45,6 +51,8 @@ export default {
     data: () => ({
         size1: 50,
         size2: 50,
+        left: "YAML",
+        right: "JSON",
     }),
     methods: {},
 };

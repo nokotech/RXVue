@@ -1,12 +1,12 @@
 <template>
 <div>
     <table id="table_key" class="frame" v-if="typeof val === 'object'" border="1">
-        <!-- <thead>
+        <thead>
             <tr>
-                <th class="header">key</th>
-                <th class="header">value</th>
+                <th class="header" width="200"><md-icon class="del_icon">sort</md-icon><span class="str">key</span></th>
+                <th class="header"><md-icon class="del_icon">sort</md-icon><span class="str">value</span></th>
             </tr>
-        </thead> -->
+        </thead>
         <tbody>
             <tr v-for="(item, key) in val" :key="item.id">
                 <td class="key">
