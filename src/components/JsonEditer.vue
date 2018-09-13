@@ -1,5 +1,5 @@
 <template>
-<div id="json_editer_content">
+<div id="json_editer_content" v-bind:class="{ 'error': error }">
     <div id="json_editer_header">JSON</div>
     <div id="json_editer_button">
         <md-button @click="undo">
@@ -12,7 +12,6 @@
             <md-icon>save</md-icon>
         </md-button>
     </div>
-    <div v-show="error">ERROR</div>
     <div id="json_editor" style="height: 600px; width: 100%;" />
 </div>
 </template>
@@ -25,7 +24,6 @@ import {
 import 'ace-builds/src-noconflict/mode-json.js';
 import chrome from 'ace-builds/src-noconflict/theme-chrome.js';
 import monokai from 'ace-builds/src-noconflict/theme-monokai.js';
-import Ajv from 'ajv';
 
 let editor = null;
 let fromSetValue = false;
@@ -69,14 +67,12 @@ export default {
                 if (!editor.getValue() || fromSetValue) {
                     return;
                 }
-                const validate = new Ajv().compile({ 'type': 'object' });
-                const valid = validate(editor.getValue());
-                console.log(validate);
-                this.data().error = !validate.errors;
 
                 const val = JSON.parse(editor.getValue());
                 this.$store.commit('updateSourceToJson', val);
+                this.error = false;
             } catch (e) {
+                this.error = true;
                 // console.warn('JSON PARSE ERROR!!!');
                 // console.warn(v);
                 // console.warn(e);
@@ -112,6 +108,9 @@ export default {
 #json_editer_content {
     text-align: left;
     border: 1px solid #AAA;
+    &.error {
+      background-color: #FFAAAA;
+    }
 }
 
 #json_editer_header {

@@ -2,16 +2,22 @@
 <div>
     <table id="table_key" class="frame" v-if="typeof val === 'object'" border="1">
         <thead>
-            <tr>
-                <th class="header" width="200"><md-icon class="del_icon">sort</md-icon><span class="str">key</span></th>
-                <th class="header"><md-icon class="del_icon">sort</md-icon><span class="str">value</span></th>
+            <tr @click="tap">
+                <th class="header">
+                  <!-- <md-icon class="del_icon">sort</md-icon> -->
+                  <span class="str">key</span>
+                </th>
+                <th class="header">
+                  <!-- <md-icon class="del_icon">sort</md-icon> -->
+                  <span class="str">value</span>
+                </th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(item, key) in val" :key="item.id">
                 <td class="key">
-                    <md-icon class="del_icon">swap_vert</md-icon>
-                    <md-icon class="del_icon">delete</md-icon>
+                    <!-- <md-icon class="del_icon">swap_vert</md-icon> -->
+                    <!-- <md-icon class="del_icon" @click="delete(key)">delete</md-icon> -->
                     <span class="str">{{key}}</span>
                 </td>
                 <td class="value">
@@ -45,6 +51,17 @@ export default {
         //             console.log(`drop ${el.nodeName} from ${from} ${mode} to ${to} ${mode}`);
         //         });
         // }
+    },
+    methods: {
+        delete(key: string|number) {
+            // let source = this.$store.state.source;
+            // this.$store.commit('updateSourceToJson', source);
+        },
+        tap() {
+          $('table').each((index: number, element: any) => {
+            console.log($(element));
+            $(element).resizableColumns(); });
+        },
     },
 };
 </script>
