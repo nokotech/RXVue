@@ -11,16 +11,18 @@
     </md-button>
     <Split style="height: 800px;" ref="selfSplit">
         <SplitArea :size="size1" ref="area1">
-            <md-button class="md-primary" @click="left='YAML'">YAML</md-button>
-            <md-button class="md-primary" @click="left='BLOCK'">BLOCK</md-button>
-            <YamlEditer v-show="left==='YAML'"/>
-            <BlockEditer v-show="left==='BLOCK'"/>
+            <div class="select_button">
+                <md-button class="md-primary" @click="left='YAML'">YAML</md-button>
+                <md-button class="md-primary" @click="left='BLOCK'">BLOCK</md-button>
+            </div>
+            <YamlEditer v-show="left==='YAML'" />
+            <BlockEditer v-show="left==='BLOCK'" />
         </SplitArea>
         <SplitArea :size="size2" ref="area2">
-            <md-button class="md-primary">
-                JSON
-            </md-button>
-            <JsonEditer/>
+            <div class="select_button">
+                <md-button class="md-primary">JSON</md-button>
+            </div>
+            <JsonEditer />
         </SplitArea>
     </Split>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
@@ -61,5 +63,9 @@ export default {
 <style lang="scss">
 .split-horizontal {
     padding: 16px;
+}
+.select_button {
+    max-height: 48px;
+    overflow: hidden;
 }
 </style>

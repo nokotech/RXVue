@@ -1,6 +1,6 @@
 <template>
 <div>
-    <table id="table_key" class="frame" v-if="typeof val === 'object'" border="1">
+    <table v-bind:id="table_key" class="frame" v-if="typeof val === 'object'" border="1">
         <thead>
             <tr @click="tap">
                 <th class="header">
@@ -21,7 +21,7 @@
                     <span class="str">{{key}}</span>
                 </td>
                 <td class="value">
-                    <TableComp :val="item" />
+                    <TableComp :val="item" :table_key="table_key+'__'+key"/>
                 </td>
             </tr>
         </tbody>
@@ -59,7 +59,6 @@ export default {
         },
         tap() {
           $('table').each((index: number, element: any) => {
-            console.log($(element));
             $(element).resizableColumns(); });
         },
     },

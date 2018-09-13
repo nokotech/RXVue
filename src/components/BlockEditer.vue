@@ -16,7 +16,7 @@
         </md-button>
     </div>
     <div id="block_editor" style="width: 100%;">
-        <TableComp :val="this.$store.state.source" table_key="key1" />
+        <TableComp :val="this.$store.state.source" table_key="" />
     </div>
 </div>
 </template>
@@ -53,6 +53,7 @@ export default {
     text-align: left;
     border: 1px solid #AAA;
     padding-bottom: 8px;
+    overflow: scroll;
 }
 
 #block_editor {

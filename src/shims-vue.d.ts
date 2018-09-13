@@ -5,4 +5,4 @@ declare module '*.vue' {
 
 declare module 'vue-split-panel'
 declare module 'table-dragger'
-declare module 'jquery'
+declare const $: any
